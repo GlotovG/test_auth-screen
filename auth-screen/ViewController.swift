@@ -72,9 +72,8 @@ class ViewController: UIViewController {
                 
             case .destructive:
                 print("destructive")
-                
-                
-            }}))
+            }
+        }))
         self.present(alert, animated: true, completion: nil)
     }
     
