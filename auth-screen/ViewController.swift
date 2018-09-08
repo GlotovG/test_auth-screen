@@ -59,6 +59,7 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "login", sender: nil)
     }
     
+    //универсальная функция вызова alert
     func alertView(title:String, message: String, titleButton: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: titleButton, style: .default, handler: { action in
