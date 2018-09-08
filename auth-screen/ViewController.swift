@@ -24,7 +24,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         registrationBtn.layer.cornerRadius = 5
         loginBtn.layer.cornerRadius = 5
-        loginBtn.isEnabled = false
+        
+        //для скрытия клавиатуры по тапу
+        addTapGestureToHideKeyboard()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,7 +35,7 @@ class ViewController: UIViewController {
 
     @IBAction func loginPressed(_ sender: Any) {
         if (userLogin.text?.isEmpty)! || (userPassword.text?.isEmpty)!{
-            //ничего не делать, но можно вывести сообщение о необходимости заполнить логин и пароль
+            alertView(title: "Ошибка", message: "Пожалуйста, заполните поля логин и пароль.", titleButton: "Ок")
         } else {
             if let userName = userLogin.text {
                 myInformation = "Привет, " + userName
@@ -57,4 +59,30 @@ class ViewController: UIViewController {
         performSegue(withIdentifier: "login", sender: nil)
     }
     
+    func alertView(title:String, message: String, titleButton: String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: titleButton, style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+}
+
+//общая функция скрытия клавиатуры по тапу
+extension UIViewController {
+    func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
+        view.addGestureRecognizer(tapGesture)
+    }
 }
